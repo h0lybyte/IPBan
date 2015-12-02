@@ -18,9 +18,12 @@
         $final = array();
         if(is_array($m_data) && count($m_data) > 0){
                                                                         foreach($m_data as $M){
-                                                                        
+                                                                        $data = $ipbwi->member->info($M);
                                                                         $FPM = array(
-                                                                                        'data' => $ipbwi->member->info($M));
+                                                                                        'm_id' => $M,
+                                                                                        'email' => $data['email'],
+                                                                                        'ip' => $data['ip_address'],
+                                                                                        );
                                                                         array_push($final, $FPM);
                                    
                                     }
@@ -32,7 +35,7 @@
         
         
         
-        $final = array("status" => true, "data" => $m_data);
+        $final = array("status" => true, "data" => $final);
         echo json_encode($final, JSON_UNESCAPED_SLASHES);
         exit;
 ?>
