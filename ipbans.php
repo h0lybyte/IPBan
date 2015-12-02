@@ -12,7 +12,7 @@
         }
         @$data = @h0lybyte();
         @$command = @$data->command;
-        $exile = '5';
+        $exile = '25';
         $m_data = $ipbwi->member->findMemberCustomFieldValue($exile, true);
         
         $final = array();
@@ -34,7 +34,7 @@
         
         
         
-        $final = array("status" => true, "data" => $member_data);
+        $final = array("status" => true, "data" => $m_data);
         echo json_encode($final, JSON_UNESCAPED_SLASHES);
         exit;
 ?>
