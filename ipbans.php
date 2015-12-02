@@ -13,7 +13,7 @@
         @$data = @h0lybyte();
         @$command = @$data->command;
         $exile = '25';
-        $m_data = $ipbwi->member->findMemberCustomFieldValue($exile, true);
+        $m_data = $ipbwi->member->findMemberCustomFieldValue($exile, "true");
         
         $final = array();
         if(is_array($m_data) && count($m_data) > 0){
