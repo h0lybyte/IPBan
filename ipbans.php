@@ -12,25 +12,31 @@
         }
         @$data = @h0lybyte();
         @$command = @$data->command;
-        $exile = 25;
-        $m_data = $ipbwi->member->findMemberCustomFieldValue($exile, "true");
+        if(!isset($command))
+        {
+                $command = $_GET['command'];
+        }
+        if($command == "fetch")
+        {
+                $exile = 25;
+                $m_data = $ipbwi->member->findMemberCustomFieldValue($exile, "true");
+                
+                $final = array();
+                if(is_array($m_data) && count($m_data) > 0){
+                                                                                foreach($m_data as $M){
+                                                                                $data = $ipbwi->member->info($M);
+                                                                                $FPM = array(
+                                                                                                'm_id' => $M,
+                                                                                                'email' => $data['email'],
+                                                                                                'ip' => $data['ip_address'],
+                                                                                                );
+                                                                                array_push($final, $FPM);
+                                           
+                                            }
+                                                                        }
         
-        $final = array();
-        if(is_array($m_data) && count($m_data) > 0){
-                                                                        foreach($m_data as $M){
-                                                                        $data = $ipbwi->member->info($M);
-                                                                        $FPM = array(
-                                                                                        'm_id' => $M,
-                                                                                        'email' => $data['email'],
-                                                                                        'ip' => $data['ip_address'],
-                                                                                        );
-                                                                        array_push($final, $FPM);
-                                   
-                                    }
-                                                                }
-
-
-
+        
+        }
 
         
         
