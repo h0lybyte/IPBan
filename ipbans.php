@@ -12,7 +12,9 @@
         }
         @$data = @h0lybyte();
         @$command = @$data->command;
-        $final = array("status" => true, "data" =>  $ipbwi->member->getList(array('order' => 'asc', 'start' => '0', 'limit' => '30', 'orderby' => 'name', 'group' => '5')));
+        $exile = '5';
+        $member_data = $ipbwi->member->findMemberCustomFieldValue($exile, true);
+        $final = array("status" => true, "data" =>         ;
         echo json_encode($final, JSON_UNESCAPED_SLASHES);
         exit;
 ?>
