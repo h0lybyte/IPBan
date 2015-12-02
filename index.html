@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>IPBans - Exiled MemberList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+	padding-top: 30px;
+}
+</style>
+<!-- 
+<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+This app / page was designed by the ColorSin network and edits by h0lybyte
+
+
+ -->
+</head>
+
+<body>
+	<div class="container">
+		<h1>Exiled Members @KBVE</h1>
+		<p>
+			The purpose of this tool is to generate a list of exiled members to search against. 
+		</p>
+
+		<br />
+		<ul class="nav nav-list">
+			<li class="divider"></li>
+		</ul>
+		<br />
+
+		<div class="alert alert-info">Press Fetch</div>
+		<div class="well well-small">
+		
+		<div class="alert alert-error fade in" id="http-error" style="display:none;">
+		    <a class="close" href="#" onclick="$('#http-error').hide();">&times;</a>
+		    Error sending the request.
+		</div>
+		
+		<div class="alert alert-error fade in" id="json-error" style="display:none;">
+            <a class="close" href="#" onclick="$('#json-error').hide();">&times;</a>
+            Error parsing JSON request.
+        </div>
+  
+			<form class="form-vertical" method="POST">
+				
+				
+
+				<div class="control-group">
+					<div class="controls">
+						<button type="button" class="btn btn-primary" onclick="formSubmit()">Fetch</button> <i class="icon-info-sign"></i> Uses the HTTP POST method when submitting data.
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="alert alert-success text-center">
+		    <button type="button" class="close" data-dismiss="alert">&times;</button>
+		
+        </div>
+
+		<div class="alert alert-info"> The list is shown here.</div>
+
+		<div class="well well-small">
+			<div class="alert alert-error fade in" id="json-error2" style="display:none;">
+	            <a class="close" href="#" onclick="$('#json-error2').hide();">&times;</a>
+	            Error parsing JSON response.
+	        </div>
+        
+			<div class="control-group">
+				<label class="control-label" for="response">Raw Response
+					JSON String</label>
+				<div class="controls">
+					<textarea id="responseJson" rows="5" class="input-block-level"
+						disabled></textarea>
+				</div>
+			</div>
+
+            <div class="control-group">
+                <label class="control-label" for="responseSize">Response Size (bytes)</label>
+                <div class="controls">
+                    <input type="text" id="responseSize" class="input-xxlarge"
+                        disabled></textarea>
+                </div>
+            </div>
+            
+            <p>Response objects</p>
+			<table class="table table-striped" id="table_div">
+			</table>
+		</div>
+
+		<div class="alert alert-success text-center">
+		    <button type="button" class="close" data-dismiss="alert">&times;</button>
+			
+        </div>
+
+        <br />
+        <ul class="nav nav-list">
+            <li class="divider"></li>
+        </ul>
+        <br />
+        
+        <div class="accordion" id="accordion2">  
+            <div class="accordion-group">  
+              <div class="accordion-heading">  
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">  
+                  Contact h0lybyte for updates
+                 
+                </a>  
+              </div>  
+              <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">  
+                <div class="accordion-inner">
+                 <form class="form-vertical" method="POST">
+                 	<div class="control-group">
+					<label class="control-label" for="requestJson">Current Server Count </label>
+					<div class="controls">
+						<textarea id="sync" rows="1" class="input-block-level"></textarea>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<div class="controls">
+						<button type="button" class="btn btn-primary" onclick="">Na bruh, no updates</button> <i class="icon-info-sign"></i> Uses the HTTP POST method when submitting data.
+					</div>
+				</div>
+                 </form>
+                </div>  
+              </div>  
+            </div> 
+        </div>
+        
+        <div class="well well-small text-center muted">
+      
+        </div>
+        
+	</div>
+
+
+
+    <script src="https://kbve.com/api/member/register/json2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+
+	<script>
+	var alertVisible = false;
+	
+	function formSubmit()
+	{
+	    if (alertVisible) {
+	    	$("#http-error").hide();
+	    	$("#json-error").hide();
+	    	$("#json-error2").hide();
+	    }
+	    alertVisible = false;
+	    
+	    var r_url = "https://kbve.com/api/member/ban.php";
+	    var r_txt = '{"command" : "fetch", "brand" : ""}';
+	    
+	    try {
+	    	   var JSONObject = JSON.parse(r_txt);
+	    }
+	    catch (ex) {
+	    	$("#json-error").show();
+            alertVisible = true;
+            return;
+	    }
+	    
+	    var http = new XMLHttpRequest();
+	    http.open("POST", r_url, true);
+	    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    http.setRequestHeader("Content-length", r_txt.length);
+	    http.setRequestHeader("Connection", "close");
+	    http.onreadystatechange = function() {
+	        if (http.readyState == 4) {
+	            if (http.status == 200) {
+	                   document.getElementById("responseJson").value = http.responseText;
+	                   document.getElementById("responseSize").value = http.responseText.length;
+	                   
+	                   try {
+	                       var JSONObject = JSON.parse(http.responseText);
+	                       
+	                       var myNode = document.getElementById("table_div");
+	                       myNode.innerHTML = '';
+	                       
+	                       jQuery.each(JSONObject, function(index, value) {
+	                    	   if (typeof value == 'object') {
+	                    		   addToTable(index, value);
+	                    	   }
+	                    	   else {
+	                    		    $("#table_div").append("<tr><td>" + index + "</td><td>" + value + "</td></tr>");
+	                    	   }
+	                        });
+		               }
+	                   catch (ex) {
+	                       $("#json-error2").show();
+	                       alertVisible = true;
+	                       return;
+	                   }
+	                   
+	            }
+	            else {
+	                $("#http-error").show();
+	                alertVisible = true;
+	            }
+	        }
+	    }
+	    http.send(r_txt);
+	}
+	
+	
+
+	
+	
+	function addToTable(index, value) {
+		jQuery.each(value, function(indexIn, valueIn) {
+			if (typeof valueIn == 'object') {
+	            addToTable(index + " <b>.</b> " + indexIn, valueIn);
+	        }
+			else {
+			    $("#table_div").append("<tr><td>" + index + " <b>.</b> " + indexIn + "</td><td>" + valueIn + "</td></tr>");
+			}
+		});
+	}
+	</script>
+</body>
+</html>
