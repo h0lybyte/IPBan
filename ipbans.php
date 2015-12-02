@@ -12,19 +12,7 @@
         }
         @$data = @h0lybyte();
         @$command = @$data->command;
-    
-        /**  
-         *  
-         * 
-         * 
-         * 
-         * */
-         
-        
-        $final = array("status" => true, "data" =>  $ipbwi->member->getList(array('order' => 'asc', 'start' => '0', 'limit' => '-1', 'orderby' => 'name', 'group' => '5')));
+        $final = array("status" => true, "data" =>  $ipbwi->member->getList(array('order' => 'asc', 'start' => '0', 'limit' => '30', 'orderby' => 'name', 'group' => '5')));
         echo json_encode($final, JSON_UNESCAPED_SLASHES);
         exit;
-         
-
-
 ?>
