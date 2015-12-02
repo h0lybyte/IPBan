@@ -12,7 +12,7 @@
         }
         @$data = @h0lybyte();
         @$command = @$data->command;
-        $exile = '25';
+        $exile = 25;
         $m_data = $ipbwi->member->findMemberCustomFieldValue($exile, "true");
         
         $final = array();
