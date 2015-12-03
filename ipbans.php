@@ -21,13 +21,13 @@
         if($command == "ipbans")
         {
                 //$options = array('group' => '5');
-                @$m_data = @$ipbwi->member->getList();
+                @$m_data = @$ipbwi->group->isInGroup($bangroup);
                 @$final = array();
                
                 if(is_array($m_data) && count($m_data) > 0){
                                                                                 foreach($m_data as $M){
                                                                                 $data = $ipbwi->member->info($M);
-                                                                                if($data['member_group_id'] == $bangroup)
+                                                                              //  if($data['member_group_id'] == $bangroup)
                                                                                 $FPM = array(
                                                                                                 'm_id' => $M,
                                                                                                 'email' => $data['email'],
