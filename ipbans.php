@@ -33,8 +33,8 @@
                                                                                                 'email' => $data['email'],
                                                                                                 'ip' => $data['ip_address'],
                                                                                                 );
-                                                                                array_push($final, $FPM);
-                                           
+                                                                                @array_push($final, $FPM);
+                                           // Okay
                                                                                 }
                                                            }
         
