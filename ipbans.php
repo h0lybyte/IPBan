@@ -21,9 +21,10 @@
                 //$options = array('group' => '5');
                 //$m_data = $ipbwi->member->getList($options);
                 $i = 5; // Group for Bans
+                $sql_tbl_prefix = '';
                 $where = 'm.member_group_id="'.$i.'" ';
                 $where = 'WHERE m.member_id != "0" AND ('.$where.')';
-                $ipbwi->ips_wrapper->DB->query('SELECT m.*, g.*, cf.* FROM '.$ipbwi->board['sql_tbl_prefix'].'members m LEFT JOIN '.$ipbwi->board['sql_tbl_prefix'].'groups g ON (m.member_group_id=g.g_id) LEFT JOIN '.$ipbwi->board['sql_tbl_prefix'].'pfields_content cf ON (cf.member_id=m.member_id) '.$where.';');
+                $ipbwi->ips_wrapper->DB->query('SELECT m.*, g.*, cf.* FROM '.$sql_tbl_prefix.'members m LEFT JOIN '.$sql_tbl_prefix.'groups g ON (m.member_group_id=g.g_id) LEFT JOIN '.$sql_tbl_prefix.'pfields_content cf ON (cf.member_id=m.member_id) '.$where.';');
                 $final = array();
                 while($row = $ipbwi->ips_wrapper->DB->fetch()){
                         $m_data[$row['member_id']] = $row;
