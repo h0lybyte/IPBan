@@ -18,7 +18,7 @@
         }
         if($command == "ipbans")
         {
-                $m_data = $ipbwi->group->listMemberGroups(5);
+                $m_data = $ipbwi->member->getList(array('group' => '5'));
                 
                 $final = array();
                 if(is_array($m_data) && count($m_data) > 0){
