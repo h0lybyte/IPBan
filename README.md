@@ -7,3 +7,5 @@ Simple IPB ban list.
 
 
 - - Custom Client to make requests will be added:
+
+More Info: https://kbve.com/c/index.php?/topic/1541-phpipb-ipbans/
