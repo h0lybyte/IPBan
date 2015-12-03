@@ -16,7 +16,28 @@
         {
                 $command = $_GET['command'];
         }
-        if($command == "fetch")
+        if($command == "ipbans")
+        {
+                $m_data = $ipbwi->group->listMemberGroups(5);
+                
+                $final = array();
+                if(is_array($m_data) && count($m_data) > 0){
+                                                                                foreach($m_data as $M){
+                                                                                $data = $ipbwi->member->info($M);
+                                                                                $FPM = array(
+                                                                                                'm_id' => $M,
+                                                                                                'email' => $data['email'],
+                                                                                                'ip' => $data['ip_address'],
+                                                                                                );
+                                                                                array_push($final, $FPM);
+                                           
+                                                                                }
+                                                           }
+        
+        
+        }
+
+          if($command == "fetch")
         {
                 $exile = 25;
                 $m_data = $ipbwi->member->findMemberCustomFieldValue($exile, "true");
@@ -32,14 +53,12 @@
                                                                                                 );
                                                                                 array_push($final, $FPM);
                                            
-                                            }
-                                                                        }
+                                                                                }
+                                                           }
         
         
         }
 
-        
-        
         
         $final = array("status" => true, "data" => $final);
         echo json_encode($final, JSON_UNESCAPED_SLASHES);
